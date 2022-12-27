@@ -2,8 +2,14 @@
 import csv
 import pandas as pd
 
-data = pd.read_csv("daily_sales_data_0.csv") #read the csv file
-ds = pd.DataFrame(data) #load using panda dataframe
+data1 = pd.read_csv("daily_sales_data_0.csv") #read the csv file
+data2 = pd.read_csv("daily_sales_data_1.csv")
+data3 = pd.read_csv("daily_sales_data_2.csv")
+con = pd.concat(map(pd.read_csv,['daily_sales_data_0.csv',
+                'daily_sales_data_1.csv', 
+                'daily_sales_data_2.csv']
+                ))
+ds = pd.DataFrame(con)  # load using panda dataframe
 dt = ds[ds['product'] == "pink morsel"] #isolate pink morsel
 
 dmSales = dt['quantity'] * dt['price'].str[1:].astype(float) #function for calcultion the sales
